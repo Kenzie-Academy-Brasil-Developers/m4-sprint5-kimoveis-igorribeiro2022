@@ -11,13 +11,13 @@ services:
       - DB_PASSWORD=1234
       - DB=sprint5
       - DB_USER=igorribeiro
-      - SECRET_KEY=sua_chave_secreta
+      - SECRET_KEY=KImoveis3%#-h9!ps8msv7xp3i&mbg9^@6cqe99aehn%z97=k^40axlez9KenzieAcademy
     depends_on:
       db:
         condition: service_healthy
     volumes:
       - .:/app
-  
+
   db:
     container_name: db
     image: postgres:14
@@ -28,10 +28,8 @@ services:
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=sprint5
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U igorribeiro -d sprint5"]
+      test: ['CMD-SHELL', 'pg_isready -U igorribeiro -d sprint5']
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 5s
-   
-

@@ -31,15 +31,12 @@ const createPropertyService = async (property: IPropertyRequest): Promise<Proper
 
   await addressesRepository.save(newAddress);
 
-  const category = await categoriesRepository.findOneBy({
-    id: property.categoryId,
-  });
-
-  const propertyAlreadyExists = await propertiesRepository.find({where: {address: property.address}});
+  const category = await categoriesRepository.findOneBy({id: property.categoryId});
   if (!category) {
     throw new AppError("Category not found", 404);
   }
-
+  
+  const propertyAlreadyExists = await propertiesRepository.find({where: {address: property.address}});
   if (propertyAlreadyExists.length > 0) {
     throw new AppError("Address already exists", 400);
   }
